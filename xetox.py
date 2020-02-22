@@ -28,7 +28,7 @@ class Net(nn.Module):
 
 class MyDataset(torch.utils.data.Dataset):
     def __init__(self):
-        self.df = pd.read_csv("./data/train_data_utf_8_preprocessing.csv", delimiter=",")
+        self.df = pd.read_csv("./data/train_data.csv", delimiter=",")
         #self.data_num = len(self.df)
         self.data_num = 10000
 
@@ -48,8 +48,10 @@ def train(args, model, device, train_loader, optimizer, epoch):
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
         output = model(data)
-        #print(target)
-        #print(output)
+        print("###target###")
+        print(target)
+        print("###output###")
+        print(output)
         loss = criterion(output, target)
         loss.backward()
         optimizer.step()
@@ -78,7 +80,7 @@ def test(args, model, device, test_loader):
 
 def main():
     parser = argparse.ArgumentParser(description='PyTorch implementation of horse racing prediction')
-    parser.add_argument('--batch-size', type=int, default=2, metavar='N', help='input batch size for training (default: 64)')
+    parser.add_argument('--batch-size', type=int, default=32, metavar='N', help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N', help='input batch size for testing (default: 1000)')
     parser.add_argument('--epochs', type=int, default=100, metavar='N', help='number of epochs to train (default: 14)')
     parser.add_argument('--lr', type=float, default=1.0, metavar='LR', help='learning rate (default: 1.0)')
@@ -90,7 +92,7 @@ def main():
     args = parser.parse_args()
 
     data_set = MyDataset()
-    train_loader = torch.utils.data.DataLoader(data_set, batch_size=args.batch_size, shuffle=False)
+    train_loader = torch.utils.data.DataLoader(data_set, batch_size=args.batch_size, shuffle=True)
 
     use_cuda = not args.no_cuda and torch.cuda.is_available()
     print(torch.cuda.is_available())
@@ -109,7 +111,7 @@ def main():
         scheduler.step()
 
     if args.save_model:
-        torch.save(model.state_dict(), "horse_racing_prediction2.pt")
+        torch.save(model.state_dict(), "horse_racing_prediction.pt")
 
 if __name__ == '__main__':
     main()
