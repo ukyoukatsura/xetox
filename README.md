@@ -92,6 +92,3 @@ Katsura Ukyo
     * 障害直線芝:2
     * 障害直線ダート:3
     * 芝外回り:4
-
-# Data order
-
