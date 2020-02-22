@@ -1,6 +1,6 @@
 # XETOX
 
-**TODO:Data loader,Preprocess data,**
+**TODO:Construct architecture,Preprocess data,**
 
 ## Description
 
@@ -20,7 +20,7 @@ git clone https://github.com/ukyoukatsura/xetox.git
 
 ```
 cd xetox
-Python xetox.py
+python xetox.py
 ```
 
 ## Author
