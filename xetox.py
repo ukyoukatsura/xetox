@@ -19,12 +19,15 @@ class Net(nn.Module):
         self.fc2 = nn.Linear(300, 300)
         self.fc3 = nn.Linear(300, 1)
         self.dropout = nn.Dropout(0.2)
+        self.bn1 = nn.BatchNorm1d(300)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
+        x = bn1(x)
         x = self.dropout(x)
         x = F.relu(self.fc2(x))
+        x = bn1(x)
         x = self.dropout(x)
         x = self.fc3(x)
         #x = self.sigmoid(x)
