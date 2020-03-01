@@ -8,9 +8,9 @@ from torch.optim.lr_scheduler import StepLR
 import pandas as pd
 import argparse
 #Visualization
-from visdom import Visdom
+#from visdom import Visdom
 
-viz = Visdom()
+#viz = Visdom()
 
 class Net(nn.Module):
     def __init__(self):
@@ -24,10 +24,10 @@ class Net(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
-        x = bn1(x)
+        x = self.bn1(x)
         x = self.dropout(x)
         x = F.relu(self.fc2(x))
-        x = bn1(x)
+        x = self.bn1(x)
         x = self.dropout(x)
         x = self.fc3(x)
         #x = self.sigmoid(x)
@@ -35,7 +35,7 @@ class Net(nn.Module):
 
 class MyDataset(torch.utils.data.Dataset):
     def __init__(self):
-        self.df = pd.read_csv("./data/train_data.csv", delimiter=",")
+        self.df = pd.read_csv("train_data.csv", delimiter=",")
         #self.data_num = len(self.df)
         self.data_num = 10000
 
